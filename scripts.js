@@ -92,45 +92,7 @@ function updateScrollButtons(grid) {
     }
 }
 
-// Função para abrir links do YouTube
-function openYoutubeLink(event, url) {
-    event.preventDefault();
-    
-    // Extrai o ID do vídeo da URL
-    const videoId = getYoutubeVideoId(url);
-    if (!videoId) {
-        window.open(url, '_blank');
-        return;
-    }
-    
-    // Detecta se é dispositivo móvel
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-        // Tenta abrir no app primeiro
-        window.location.href = `youtube://video/${videoId}`;
-        
-        // Se não abrir no app após 500ms, tenta o esquema vnd.youtube
-        setTimeout(function() {
-            window.location.href = `vnd.youtube:${videoId}`;
-            
-            // Se ainda não abrir, usa o navegador como fallback após mais 500ms
-            setTimeout(function() {
-                window.location.href = `https://www.youtube.com/watch?v=${videoId}`;
-            }, 500);
-        }, 500);
-    } else {
-        // Em desktop, abre normalmente no navegador
-        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-    }
-}
 
-// Função para extrair o ID do vídeo de uma URL do YouTube
-function getYoutubeVideoId(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-}
 
 // Inicialização dos componentes
 document.addEventListener('DOMContentLoaded', function () {
@@ -143,10 +105,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Configura os links do YouTube
-    document.querySelectorAll('a[href*="youtube.com"], a[href*="youtu.be"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            openYoutubeLink(e, this.href);
-        });
-    });
+
 });
