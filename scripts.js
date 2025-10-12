@@ -92,10 +92,12 @@ function updateScrollButtons(grid) {
     }
 }
 
-
-
 // Inicialização dos componentes
 document.addEventListener('DOMContentLoaded', function () {
+    // Inicializa o display do treino inicial
+    const workoutSelect = document.getElementById('workout-select');
+    updateWorkoutDisplay(workoutSelect.value);
+
     // Inicializa os botões de scroll
     const allGrids = document.querySelectorAll('.exercises-grid');
     allGrids.forEach(grid => {
@@ -104,6 +106,4 @@ document.addEventListener('DOMContentLoaded', function () {
             updateScrollButtons(grid);
         });
     });
-
-
 });
