@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Treino</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏋️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <button class="info-button" onclick="openModal()" title="Orientações">
+                <span>i</span>
+            </button>
+            <h1>Meu Treino</h1>
+        </header>
+
+        <!-- Modal de Orientações -->
+        <div id="orientationsModal" class="modal" onclick="closeModalOutside(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h2>Orientações</h2>
+                    <button class="close-button" onclick="closeModal()">&times;</button>
+                </div>
+                <ul>
+                    <li>
+                        Esse treinamento possui um foco maior na região de <strong>PEITORAL E OMBROS</strong>, visando a
+                        construção de um <strong>SHAPE V</strong> e maior destaque desses grupos musculares.
+                    </li>
+                    <li>
+                        Você deverá treinar peitoral <strong>2x na semana</strong>, seguindo a planilha.
+                    </li>
+                    <li>
+                        Caso consiga, <span class="highlight-red">não consiga treinar os 5 dias da semana, "pule" o
+                            treino E (inferiores)</span>.
+                    </li>
+                    <li>
+                        <strong>PROGRESSÃO DE CARGAS:</strong> Uma das variáveis mais importantes é a progressão de
+                        cargas. Assim que você perceber que está "leve" e você passar de 12 repetições, aumente cerca de
+                        5 a 10% da carga.
+                    </li>
+                    <li>
+                        <strong class="highlight-red">VÍDEOS DOS EXERCÍCIOS:</strong> Ao clicar no nome do exercício em
+                        sua ficha, você será direcionado para um vídeo no YouTube com o passo a passo e a execução
+                        correta a ser feita. Obs: Certifique de que seu celular esteja com permissão para abrir
+                        "hiperlinks" ou links externos.
+                    </li>
+                    <li>
+                        <strong class="highlight-red">ORDEM DOS EXERCÍCIOS:</strong> Se não for possível seguir a ordem
+                        dos exercícios, passe para o próximo e depois retorne. O importante é completar a ficha de cada
+                        dia.
+                    </li>
+                    <li>
+                        <strong class="highlight-red">MOBILIDADE PARA PERNAS:</strong> Antes de começar os treinos de
+                        inferiores, faça seu aquecimento corretamente. <span class="highlight-green"><a
+                                style="color: #7bed9f;" href="https://www.youtube.com/watch?v=spvFidOCpRE"
+                                target="_blank">CLIQUE
+                                AQUI</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Seletor de Treinos -->
+        <div class="workout-selector">
+            <select id="workout-select" onchange="updateWorkoutDisplay(this.value)">
+                <option value="A">TREINO A - Peito / Ombro / Tríceps</option>
+                <option value="B">TREINO B - Em breve</option>
+                <option value="C">TREINO C - Dorsais / Bíceps / Deltoide Posterior</option>
+                <option value="D">TREINO D - Em breve</option>
+                <option value="E">TREINO E - Em breve</option>
+            </select>
+        </div>
+
+        <!-- Container dos Treinos -->
+        <div id="workout-container">
+            <!-- Treino A -->
+            <div id="workout-A" class="workout-content">
+                <div class="carousel-container">
+                    <div class="exercises-carousel">
+                        <div class="exercises-wrapper">
+                            <button class="scroll-button prev" onclick="scrollExercises('prev', 'workout-A')"
+                                aria-label="Exercício anterior">
+                                ❮
+                            </button>
+                            <button class="scroll-button next" onclick="scrollExercises('next', 'workout-A')"
+                                aria-label="Próximo exercício">
+                                ❯
+                            </button>
+                            <div class="exercises-grid">
+                                <!-- Exercício 1 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.gladiatorfit.ch/wp-content/uploads/2022/11/rotation-externe-poulie-1000x563.jpg"
+                                        alt="Rotação Externa Polia Unilateral" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Rotação Ext. Polia Unilateral</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x15</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Submáximo</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">Nonstop</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=r3ax7CndzoQ&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=88"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 2 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/05/dumbbell-incline-bench-press.gif"
+                                        alt="Supino Inclinado Halteres" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Supino Inclinado Halteres</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">1x15 + 3x8-10</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">120s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>Técnica:</strong> Próximo da falha. Comece com um peso menor, faça
+                                            2-3
+                                            séries de
+                                            aquecimento. Após isso, avance para sua carga principal.
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=ZhWgcCY2lqs" target="_blank"
+                                            class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 3 -->
+                                <div class="exercise-card">
+                                    <img src="https://static.wixstatic.com/media/2edbed_6b44dde677364c4f937bb1ce55dcff60~mv2.gif"
+                                        alt="Crucifixo Inclinado Haltere" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Crucifixo Inclinado Haltere</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo da falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=Giy7FAPf8oA&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=32"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 4 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2024/04/lever-chest-press-.gif"
+                                        alt="Supino Máquina Sentado Reto" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Supino Máquina Sentado Reto</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x8-10</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo da falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/shorts/RILogqbMVzQ" target="_blank"
+                                            class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 5 -->
+                                <div class="exercise-card">
+                                    <img src="https://preview.redd.it/whats-the-difference-between-this-2-machines-v0-ka0sxt1toe9a1.png?width=341&format=png&auto=webp&s=6534f76ee630e8c1ddb625703f5712ccf44b7818"
+                                        alt="Voador" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Voador</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">7x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">FST-7</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">30s entre séries</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>FST-7 - Como fazer:</strong>
+                                            <ul style="list-style: none; padding-left: 0; margin-top: 8px;">
+                                                <li>• Utilize uma carga onde você chegue próximo da falha com 10
+                                                    repetições
+                                                    (mantendo ao menos 2 em reserva)</li>
+                                                <li>• Realize 7 séries de 10, mantendo 30 segundos de intervalo entre as
+                                                    séries</li>
+                                                <li>• Você verá que começará ficar mais difícil a partir da quarta série
+                                                </li>
+                                                <li>• Se logo nas primeiras você não conseguir completar as 10
+                                                    repetições, é
+                                                    um
+                                                    sinal de que a carga está alta, e você deve ajustar ao menos 5kg
+                                                </li>
+                                                <li>• Se nas últimas você falhar antes da décima repetição, sem
+                                                    problema,
+                                                    faça o
+                                                    máximo que conseguir</li>
+                                            </ul>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=Ozot1-lhaBo&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=39"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 6 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/ombros-elevacao-lateral-de-ombros-com-halteres.gif"
+                                        alt="Elevação Lateral com Halteres" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Elevação Lateral com Halteres</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo da falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=9y3Kz4vFE8k&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=44"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 7 -->
+                                <div class="exercise-card">
+                                    <img src="https://i0.wp.com/omelhortreino.com.br/wp-content/uploads/2025/04/Triceps-na-polia-com-corda.gif?resize=550%2C550&ssl=1"
+                                        alt="Tríceps Corda" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Tríceps Corda</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">45s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>Técnica:</strong> Próximo da falha. Fazer Drop Set ao final da
+                                            última
+                                            série.
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=Qyd7_FaxoLs" target="_blank"
+                                            class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treino B -->
+            <div id="workout-B" class="workout-content" style="display: none;">
+                <div class="exercises-grid">
+                    <div class="exercise-card">
+                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&h=500&fit=crop"
+                            alt="Costas Iniciante" class="exercise-image">
+                        <div class="exercise-content">
+                            <h3 class="exercise-title">Em breve</h3>
+                            <div class="exercise-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Em desenvolvimento</span>
+                                </div>
+                            </div>
+                            <div class="technique-note">
+                                <strong>Nota:</strong> O treino B está sendo preparado e será disponibilizado em
+                                breve.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treino C -->
+            <div id="workout-C" class="workout-content" style="display: none;">
+                <div class="carousel-container">
+                    <div class="exercises-carousel">
+                        <div class="exercises-wrapper">
+                            <button class="scroll-button prev" onclick="scrollExercises('prev', 'workout-C')"
+                                aria-label="Exercício anterior">
+                                ❮
+                            </button>
+                            <button class="scroll-button next" onclick="scrollExercises('next', 'workout-C')"
+                                aria-label="Próximo exercício">
+                                ❯
+                            </button>
+                            <div class="exercises-grid">
+                                <!-- Exercício 1 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.gladiatorfit.ch/wp-content/uploads/2022/11/rotation-externe-poulie-1000x563.jpg"
+                                        alt="Rotação Externa Polia Unilateral" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Rotação Ext. Polia Unilateral</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">1x20 cada lado</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Aquecimento</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=r3ax7CndzoQ" target="_blank"
+                                            class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 2 -->
+                                <div class="exercise-card">
+                                    <img src="https://image.tuasaude.com/media/article/uh/yp/puxada-frontal_75625.gif?width=686&height=487"
+                                        alt="Puxada Alta Frente" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Puxada Alta Frente ou Barra Fixa</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x8-10</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo Falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>Nota:</strong> Se não conseguir fazer na barra fixa, faça no
+                                            puxador.
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=mPmfwbc_svw&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=14"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 3 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/costas-remada-curvada-.gif"
+                                        alt="Remada Curvada Pronada" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Remada Curvada Pronada</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x8-10</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo Falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">50s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=yf7rZ-lDT1s&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=23"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 4 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2021/09/remada-sentado-com-cabos-e-triangulo-para-costas.gif"
+                                        alt="Remada Baixa Triângulo" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Remada Baixa Triângulo</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x8/10/12/15</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Pirâmide Reversa</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">50s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>Pirâmide Reversa:</strong> Comece com seu maior peso.
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=Lh_NpUyMegw&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=16"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 5 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2024/09/pulldown-corda.gif"
+                                        alt="Pulldown Corda" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Pulldown Corda</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo Falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">50s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=7KNy6aij2p0&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=27"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 6 -->
+                                <div class="exercise-card">
+                                    <img src="https://static.strengthlevel.com/images/exercises/machine-reverse-fly/machine-reverse-fly-800.jpg"
+                                        alt="Crucifixo Inverso Máquina" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Crucifixo Inverso Máquina</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x12-15</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo Falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">50s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>Nota:</strong> Mantenha mesma carga nas séries.
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=YWxL4qBQEJk&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=52"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 7 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/rosca-biceps-com-halteres-no-banco-inclinado.gif"
+                                        alt="Rosca Inclinada Halteres" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Rosca Inclinada Halteres</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo Falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">50s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=6C5y_02RrfM&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=58"
+                                            target="_blank" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 8 -->
+                                <div class="exercise-card">
+                                    <img src="https://static1.minhavida.com.br/articles/28/af/90/ef/65ef2fafd8480cdibqbudriorcr3wdflcvylxsylx3bo-65eivbmdzes-kzmnxjxs-enswzgv0ycxejtiworoosmdjtfhryeoittuobpp-0dcd9uy5ict6-wn0scgyzcer4dh5-utdyttssmhcptipfb2gpyqamxafsu-orig-1-orig-1."
+                                        alt="Rosca Direta Barra W" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Rosca Direta Barra W</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Próximo Falha</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">50s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=CxsSfJb3ucA" target="_blank"
+                                            class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treino D -->
+            <div id="workout-D" class="workout-content" style="display: none;">
+                <h2 class="section-title">Treino D - Exercícios</h2>
+                <div class="exercises-grid">
+                    <div class="exercise-card">
+                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&h=500&fit=crop"
+                            alt="Treino D" class="exercise-image">
+                        <div class="exercise-content">
+                            <h3 class="exercise-title">Em breve</h3>
+                            <div class="exercise-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Em desenvolvimento</span>
+                                </div>
+                            </div>
+                            <div class="technique-note">
+                                <strong>Nota:</strong> O treino D está sendo preparado e será disponibilizado em
+                                breve.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treino E -->
+            <div id="workout-E" class="workout-content" style="display: none;">
+                <h2 class="section-title">Treino E - Exercícios</h2>
+                <div class="exercises-grid">
+                    <div class="exercise-card">
+                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&h=500&fit=crop"
+                            alt="Treino E" class="exercise-image">
+                        <div class="exercise-content">
+                            <h3 class="exercise-title">Em breve</h3>
+                            <div class="exercise-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Status</span>
+                                    <span class="detail-value">Em desenvolvimento</span>
+                                </div>
+                            </div>
+                            <div class="technique-note">
+                                <strong>Nota:</strong> O treino E está sendo preparado e será disponibilizado em
+                                breve.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,469 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: white;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    border: 1px solid #3a3a3a;
+    position: relative;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #7bed9f;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    font-weight: 400;
+    opacity: 0.8;
+    color: #b0b0b0;
+}
+
+/* Botão de Orientações */
+.info-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #3a3a3a;
+    color: #7bed9f;
+    border: 2px solid #7bed9f;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.info-button:hover {
+    background: #7bed9f;
+    color: #1a1a1a;
+    transform: scale(1.1);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: #2a2a2a;
+    padding: 16px;
+    border-radius: 12px;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    margin: 20px;
+    border: 2px solid #3a3a3a;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #7bed9f;
+}
+
+.modal-header h2 {
+    color: #7bed9f;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #b0b0b0;
+    font-size: 2em;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #7bed9f;
+}
+
+.modal-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.modal-content li {
+    padding: 12px 0;
+    border-bottom: 1px solid #3a3a3a;
+    font-size: 0.95em;
+    color: #d0d0d0;
+}
+
+.modal-content li:last-child {
+    border-bottom: none;
+}
+
+.modal-content strong {
+    color: #7bed9f;
+    font-weight: 600;
+}
+
+.highlight-red {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.highlight-green {
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Seletor de Treinos */
+.workout-selector {
+    margin-bottom: 40px;
+}
+
+.workout-selector select {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    border-radius: 12px;
+    border: 2px solid #3a3a3a;
+    background: #2a2a2a;
+    color: #7bed9f;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%237bed9f%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: 12px auto;
+    padding-right: 45px;
+}
+
+.workout-selector select:hover,
+.workout-selector select:focus {
+    border-color: #7bed9f;
+    outline: none;
+}
+
+.workout-selector select option {
+    background: #2a2a2a;
+    color: #7bed9f;
+    padding: 10px;
+}
+
+/* Conteúdo dos Treinos */
+.workout-content {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Lista de Treinos */
+.workout-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.workout-item {
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #3a3a3a;
+}
+
+.workout-item:hover {
+    transform: translateY(-3px);
+    border-color: #7bed9f;
+    background: #222;
+}
+
+.workout-item.active {
+    border-color: #7bed9f;
+    background: #222;
+}
+
+.workout-label {
+    font-size: 2em;
+    font-weight: 700;
+    color: #7bed9f;
+    margin-bottom: 8px;
+}
+
+.workout-description {
+    font-size: 0.95em;
+    color: #b0b0b0;
+}
+
+/* Exercícios */
+.scroll-button {
+    position: absolute;
+    top: 10%;
+    background: rgb(0 0 0 / 80%);
+    color: #7bed9f;
+    border: none;
+    width: 48px;
+    height: 40px;
+    border-radius: 10%;
+    font-size: 20px;
+    z-index: 2;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-button:hover {
+    background: rgb(0 0 0 / 80%);
+}
+
+.scroll-button.prev {
+    left: 0;
+}
+
+.scroll-button.next {
+    right: 0;
+}
+
+.exercises-grid {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.exercises-grid::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.exercise-card {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin: 0 auto;
+    background: #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #3a3a3a;
+}
+
+@media (min-width: 768px) {
+    .exercise-card {
+        flex: 0 0 450px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .exercises-grid {
+        justify-content: center;
+    }
+}
+
+/* ====== CARROSSEL DE EXERCÍCIOS ====== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.exercises-carousel {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.exercises-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .exercise-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.exercise-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #1a1a1a;
+}
+
+.exercise-content {
+    padding: 20px;
+}
+
+.exercise-title {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #7bed9f;
+    font-weight: 600;
+}
+
+.exercise-details {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.9em;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #b0b0b0;
+}
+
+.detail-value {
+    color: #e0e0e0;
+    font-weight: 600;
+}
+
+.technique-note {
+    background: #3a3a3a;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 0.88em;
+    border-left: 4px solid #7bed9f;
+    color: #d0d0d0;
+}
+
+.youtube-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    background: #7bed9f;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+.youtube-btn:hover {
+    background: #5fd07e;
+    transform: scale(1.02);
+}
+
+.youtube-icon {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .exercises-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .workout-list {
+        grid-template-columns: 1fr;
+    }
+
+    .expandable-header {
+        padding: 15px 20px;
+    }
+
+    .expandable-inner {
+        padding: 0 20px 20px 20px;
+    }
+
+    .info-button {
+        top: 6px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+}
