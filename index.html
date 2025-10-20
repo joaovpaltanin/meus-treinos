@@ -14,66 +14,21 @@
 <body>
     <div class="container">
         <header>
-            <button class="info-button" onclick="openModal()" title="Orientações">
-                <span>i</span>
-            </button>
             <h1>Meu Treino</h1>
         </header>
-        <div id="orientationsModal" class="modal" onclick="closeModalOutside(event)">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="modal-header">
-                    <h2>Orientações</h2>
-                    <button class="close-button" onclick="closeModal()">&times;</button>
-                </div>
-                <ul>
-                    <li>
-                        Esse treinamento possui um foco maior na região de <strong>PEITORAL E OMBROS</strong>, visando a
-                        construção de um <strong>SHAPE V</strong> e maior destaque desses grupos musculares.
-                    </li>
-                    <li>
-                        Você deverá treinar peitoral <strong>2x na semana</strong>, seguindo a planilha.
-                    </li>
-                    <li>
-                        Caso consiga, <span class="highlight-red">não consiga treinar os 5 dias da semana, "pule" o
-                            treino E (inferiores)</span>.
-                    </li>
-                    <li>
-                        <strong>PROGRESSÃO DE CARGAS:</strong> Uma das variáveis mais importantes é a progressão de
-                        cargas. Assim que você perceber que está "leve" e você passar de 12 repetições, aumente cerca de
-                        5 a 10% da carga.
-                    </li>
-                    <li>
-                        <strong class="highlight-red">VÍDEOS DOS EXERCÍCIOS:</strong> Ao clicar no nome do exercício em
-                        sua ficha, você será direcionado para um vídeo no YouTube com o passo a passo e a execução
-                        correta a ser feita. Obs: Certifique de que seu celular esteja com permissão para abrir
-                        "hiperlinks" ou links externos.
-                    </li>
-                    <li>
-                        <strong class="highlight-red">ORDEM DOS EXERCÍCIOS:</strong> Se não for possível seguir a ordem
-                        dos exercícios, passe para o próximo e depois retorne. O importante é completar a ficha de cada
-                        dia.
-                    </li>
-                    <li>
-                        <strong class="highlight-red">MOBILIDADE PARA PERNAS:</strong> Antes de começar os treinos de
-                        inferiores, faça seu aquecimento corretamente. <span class="highlight-green"><a
-                                style="color: #7bed9f;" href="https://www.youtube.com/watch?v=spvFidOCpRE"
-                                target="_blank" rel="noopener noreferrer">CLIQUE
-                                AQUI</a></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
         <!-- Seletor de Treinos -->
         <div class="workout-selector">
             <select id="workout-select" onchange="updateWorkoutDisplay(this.value)">
-                <option value="T">TÉCNICAS</option>
-                <option value="Z">TREINO Abdômen</option>
-                <option value="A">TREINO A - Peito / Ombro / Tríceps</option>
-                <option value="B">TREINO B - Inferiores Completo</option>
-                <option value="C">TREINO C - Dorsais / Bíceps / Deltoide Posterior</option>
-                <option value="D">TREINO D - Peitoral / Deltoide</option>
-                <option value="E">TREINO E - Quadríceps/Glúteo</option>
+                <option value="T">Técnicas & Orientações</option>
+                <option value="H">Alongamento Pós Treino</option>
+                <option value="Z">Abdômen</option>
+                <option value="A">A - Peito / Ombro / Tríceps</option>
+                <option value="B">B - Inferiores Completo</option>
+                <option value="C">C - Dorsais / Bíceps / Deltoide Posterior</option>
+                <option value="D">D - Peitoral / Deltoide</option>
+                <option value="E">E - Quadríceps/Glúteo</option>
+                <option value="F">Pernas de Respeito I</option>
             </select>
         </div>
 
@@ -93,6 +48,65 @@
                                 ❯
                             </button>
                             <div class="exercises-grid" style="text-align: center;">
+                                <!-- Card de Orientações Gerais -->
+                                <div class="exercise-card">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Orientações Gerais do Treino</h3>
+                                        <div class="technique-note" style="margin-bottom: 10px;">
+                                            <strong style="color: #7bed9f;">FOCO DO TREINO:</strong> Região do PEITORAL
+                                            E OMBROS, visando a construção de um SHAPE V e maior destaque desses grupos
+                                            musculares.
+                                        </div>
+                                        <div class="technique-note" style="margin-bottom: 10px;">
+                                            <strong style="color: #7bed9f;">FREQUÊNCIA:</strong> Treinar peitoral 2x na
+                                            semana, seguindo a planilha.
+                                        </div>
+                                        <div class="technique-note" style="margin-bottom: 10px;">
+                                            <strong style="color: #7bed9f;">IMPORTANTE:</strong> Se não conseguir
+                                            treinar os 5 dias da semana, pule o treino E (inferiores).
+                                        </div>
+                                        <div class="technique-note" style="margin-bottom: 10px;">
+                                            <strong style="color: #7bed9f;">PROGRESSÃO DE CARGAS:</strong> Aumente 5-10%
+                                            da carga quando passar de 12 repetições facilmente.
+                                        </div>
+                                        <div class="technique-note" style="margin-bottom: 10px;">
+                                            <strong style="color: #7bed9f;">VÍDEOS:</strong> Clique no nome do exercício
+                                            para ver o vídeo demonstrativo no YouTube.
+                                        </div>
+                                        <div class="technique-note" style="margin-bottom: 15px;">
+                                            <strong style="color: #7bed9f;">ORDEM DOS EXERCÍCIOS:</strong> Se
+                                            necessário, altere a ordem, mas complete todos os exercícios do dia.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card de Orientações de Treino de Pernas -->
+                                <div class="exercise-card">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Orientações para Treino de Pernas</h3>
+                                        <div class="technique-note" style="margin-bottom: 10px;">
+                                            <strong style="color: #7bed9f;">INTERVALOS:</strong> Dê 2 a 3 dias de
+                                            intervalo entre os treinos de perna.
+                                        </div>
+                                        <div class="technique-note" style="margin-bottom: 15px;">
+                                            <strong style="color: #7bed9f;">EXEMPLOS DE DIAS:</strong><br>
+                                            • Segunda e Quinta<br>
+                                            • Terça e Sexta<br>
+                                            • Segunda e Sexta<br>
+                                            • Terça e Sábado
+                                        </div>
+                                        <div class="youtube-btn"
+                                            style="background: #2a2a2a; color: #7bed9f; border: 1px solid #7bed9f; margin-bottom: 10px;">
+                                            IMPORTANTE: Faça seu aquecimento antes do treino!
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=spvFidOCpRE" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a1a' d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/%3E%3C/svg%3E"
+                                                alt="YouTube" class="youtube-icon"> Ver Aquecimento no YouTube
+                                        </a>
+                                    </div>
+                                </div>
+
                                 <!-- Técnica 1 -->
                                 <div class="exercise-card">
                                     <div class="exercise-content">
@@ -183,6 +197,34 @@
                 </div>
             </div>
 
+            <!-- Treino H -->
+            <div id="workout-H" class="workout-content">
+                <div class="carousel-container">
+                    <div class="exercises-carousel">
+                        <div class="exercises-wrapper">
+                            <div class="exercises-grid">
+                                <!-- Exercício 1 -->
+                                <div class="exercise-card">
+                                    <img src="https://imgs.search.brave.com/MhssQvoSeMBOfup9RELqicjmuVj8IVGptk4ABG2FVW4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90cmVp/bm9lbWNhc2EuY29t/L2Nkbi9zaG9wL2Fy/dGljbGVzL2Fsb25n/YW1lbnRvLWltcG9y/dGFuY2lhLndlYnA_/dj0xNzI1MzQ2MDEx/JndpZHRoPTExMDA"
+                                        alt="Alongamento" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Alongamento Pós Treino</h3>
+                                        <a href="https://www.youtube.com/watch?v=OpVLju5eVxw" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Treino Z -->
             <div id="workout-Z" class="workout-content">
                 <div class="carousel-container">
@@ -210,10 +252,10 @@
                                             style="background-color: rgba(123, 237, 159, 0.1); color: white; padding: 15px; margin: 10px 0; border-radius: 4px; border: 1px solid #7bed9f;">
                                             <strong>ABDÔMEN NA CORDA – 4X15</strong>
                                         </div>
-                                        <p style="color: #7bed9f; margin-top: 15px; font-size: 16px;">
-                                            PODE FAZER ABDÔMEN AO FINAL DOS TREINOS, OU EM HORÁRIO SEPARADO JUNTO COM O
-                                            CARDIO
-                                        </p>
+                                        <div class="technique-note">
+                                            <strong>IMPORTANTE:</strong> Pode fazer abdômen ao final dos treinos, ou em
+                                            horário separado junto com o cardio
+                                        </div>
                                         <a href="https://www.youtube.com/watch?v=OPjJbnkGWXg&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=92"
                                             target="_blank" rel="noopener noreferrer" class="youtube-btn">
                                             <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -226,10 +268,10 @@
                                 </div>
                                 <!-- Exercício 1 -->
                                 <div class="exercise-card">
-                                    <img src="https://i.ytimg.com/vi/KEy3EWUpHJk/maxresdefault.jpg" alt="Abdômen Infra"
-                                        class="exercise-image">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2024/12/abdominal-infra-solo2.gif"
+                                        alt="Abdômen Infra" class="exercise-image">
                                     <div class="exercise-content">
-                                        <h3 class="exercise-title">Abdômen Infra ao Chão ou Banco</h3>
+                                        <h3 class="exercise-title">Abdominal Infra</h3>
                                         <div class="exercise-details">
                                             <div class="detail-row">
                                                 <span class="detail-label">Séries/Volume</span>
@@ -240,11 +282,7 @@
                                                 <span class="detail-value">2x na semana</span>
                                             </div>
                                         </div>
-                                        <div class="technique-note">
-                                            <strong>IMPORTANTE:</strong> Pode fazer abdômen ao final dos treinos, ou em
-                                            horário separado junto com o cardio
-                                        </div>
-                                        <a href="https://www.youtube.com/watch?v=bJms9YyjoBI" target="_blank"
+                                        <a href="https://www.youtube.com/watch?v=ixJcUH8AlL8" target="_blank"
                                             rel="noopener noreferrer" class="youtube-btn">
                                             <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
                                                 <path
@@ -257,10 +295,10 @@
 
                                 <!-- Exercício 2 -->
                                 <div class="exercise-card">
-                                    <img src="https://treinomestre.com.br/wp-content/uploads/2017/08/abdominal-na-polia-1.jpg"
+                                    <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2023/02/47271301-abdominal-supra.gif"
                                         alt="Abdômen na Corda" class="exercise-image">
                                     <div class="exercise-content">
-                                        <h3 class="exercise-title">Abdômen na Corda</h3>
+                                        <h3 class="exercise-title">Abdominal Supra</h3>
                                         <div class="exercise-details">
                                             <div class="detail-row">
                                                 <span class="detail-label">Séries/Volume</span>
@@ -275,7 +313,7 @@
                                             <strong>IMPORTANTE:</strong> Mantenha o abdômen contraído durante toda a
                                             execução
                                         </div>
-                                        <a href="https://www.youtube.com/watch?v=yjEq4KJM5Hw" target="_blank"
+                                        <a href="https://www.youtube.com/watch?v=7YxVRiATugo" target="_blank"
                                             rel="noopener noreferrer" class="youtube-btn">
                                             <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
                                                 <path
@@ -290,6 +328,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Treino A -->
             <div id="workout-A" class="workout-content" style="display: none;">
                 <div class="carousel-container">
@@ -304,7 +343,69 @@
                                 ❯
                             </button>
                             <div class="exercises-grid">
+                                <!-- Exercício 0 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/03/elevacao-de-panturrilhas-com-o-peso-do-corpo.gif"
+                                        alt="Gêmeos em Pé" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Gêmeos em Pé</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Amplitude completa</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=5laQ9RG_6gY&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=87"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
                                 <!-- Exercício 1 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2018/10/lever-seated-calf-raise-.gif"
+                                        alt="Gêmeos Sentado" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Gêmeos Sentado</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">2s de pausa no topo</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/shorts/Yf0JpN_QRM8" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 2 -->
                                 <div class="exercise-card">
                                     <img src="https://www.gladiatorfit.ch/wp-content/uploads/2022/11/rotation-externe-poulie-1000x563.jpg"
                                         alt="Rotação Externa Polia Unilateral" class="exercise-image">
@@ -726,37 +827,6 @@
                                         </a>
                                     </div>
                                 </div>
-
-                                <!-- Exercício 6 -->
-                                <div class="exercise-card">
-                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/03/elevacao-de-panturrilhas-com-o-peso-do-corpo.gif"
-                                        alt="Gêmeos em Pé" class="exercise-image">
-                                    <div class="exercise-content">
-                                        <h3 class="exercise-title">Gêmeos em Pé</h3>
-                                        <div class="exercise-details">
-                                            <div class="detail-row">
-                                                <span class="detail-label">Séries/Volume</span>
-                                                <span class="detail-value">5x12</span>
-                                            </div>
-                                            <div class="detail-row">
-                                                <span class="detail-label">Técnica</span>
-                                                <span class="detail-value">Falha/Pico</span>
-                                            </div>
-                                            <div class="detail-row">
-                                                <span class="detail-label">Intervalo</span>
-                                                <span class="detail-value">45s</span>
-                                            </div>
-                                        </div>
-                                        <a href="https://www.youtube.com/watch?v=5laQ9RG_6gY" target="_blank"
-                                            class="youtube-btn">
-                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
-                                                <path
-                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                                            </svg>
-                                            Assistir Vídeo
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -777,7 +847,69 @@
                                 ❯
                             </button>
                             <div class="exercises-grid">
+                                <!-- Exercício 0 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/03/elevacao-de-panturrilhas-com-o-peso-do-corpo.gif"
+                                        alt="Gêmeos em Pé" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Gêmeos em Pé</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Amplitude completa</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=5laQ9RG_6gY&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=87"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
                                 <!-- Exercício 1 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2018/10/lever-seated-calf-raise-.gif"
+                                        alt="Gêmeos Sentado" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Gêmeos Sentado</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">2s de pausa no topo</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/shorts/Yf0JpN_QRM8" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 2 -->
                                 <div class="exercise-card">
                                     <img src="https://www.gladiatorfit.ch/wp-content/uploads/2022/11/rotation-externe-poulie-1000x563.jpg"
                                         alt="Rotação Externa Polia Unilateral" class="exercise-image">
@@ -1367,9 +1499,9 @@
                                 <!-- Exercício 3 -->
                                 <div class="exercise-card">
                                     <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/pernas-leg-press-45-com-pes-distantes.gif"
-                                        alt="Leg Press 45" class="exercise-image">
+                                        alt="Leg Press 45°" class="exercise-image">
                                     <div class="exercise-content">
-                                        <h3 class="exercise-title">Leg Press 45</h3>
+                                        <h3 class="exercise-title">Leg Press 45°</h3>
                                         <div class="exercise-details">
                                             <div class="detail-row">
                                                 <span class="detail-label">Séries/Volume</span>
@@ -1448,6 +1580,293 @@
                                         </div>
                                         <a href="https://www.youtube.com/watch?v=1BdeEx18sec" target="_blank"
                                             rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treino F -->
+            <div id="workout-F" class="workout-content" style="display: none;">
+                <div class="carousel-container">
+                    <div class="exercises-carousel">
+                        <div class="exercises-wrapper">
+                            <button class="scroll-button prev" onclick="scrollExercises('prev', 'workout-F')"
+                                aria-label="Exercício anterior">
+                                ❮
+                            </button>
+                            <button class="scroll-button next" onclick="scrollExercises('next', 'workout-F')"
+                                aria-label="Próximo exercício">
+                                ❯
+                            </button>
+                            <div class="exercises-grid">
+                                <!-- Exercício 0 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/03/elevacao-de-panturrilhas-com-o-peso-do-corpo.gif"
+                                        alt="Gêmeos em Pé" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Gêmeos em Pé</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Amplitude completa</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=5laQ9RG_6gY&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=87"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 1 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2018/10/lever-seated-calf-raise-.gif"
+                                        alt="Gêmeos Sentado" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Gêmeos Sentado</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">2s de pausa no topo</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <a href="https://www.youtube.com/shorts/Yf0JpN_QRM8" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Exercício 2 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2018/10/agachamento.gif"
+                                        alt="Agachamento Livre" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Agachamento Livre</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x8-10</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value" style="text-align: end;">Fazer série com peso
+                                                    corporal primeiro</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60-120s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>IMPORTANTE:</strong> Mantenha a postura alinhada e os pés na largura
+                                            dos ombros
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=9h_VvLDlR7k&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=74"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 2 -->
+                                <div class="exercise-card">
+                                    <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/pernas-leg-press-45-com-pes-distantes.gif"
+                                        alt="Leg Press 45°" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Leg Press 45°</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Controle a descida</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60-120s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>IMPORTANTE:</strong> Evite travar os joelhos no final do movimento
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=qeNHff6-_I8&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=73"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 3 -->
+                                <div class="exercise-card">
+                                    <img src="https://image.tuasaude.com/media/article/dv/bw/agachamento-bulgaro_62764.gif?width=686&height=487"
+                                        alt="Búlgaro com Halter" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Búlgaro com Halter</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">2x10-12 (por perna)</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Alterne as pernas</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s cada perna</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>OBS:</strong> Iniciantes podem começar apenas com o peso corporal
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=ESDKaKRqVLo" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 4 -->
+                                <div class="exercise-card">
+                                    <img src="https://treinoemalta.com.br/wp-content/uploads/2023/07/Agachamento-sumor-com-Halter.gif"
+                                        alt="Agachamento Sumo com Halter" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Agachamento Sumo com Halter</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">3x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Pés mais abertos que o normal</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60-120s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>IMPORTANTE:</strong> Mantenha os joelhos alinhados com os pés
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=fXtRvuIeovc&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=76"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 5 -->
+                                <div class="exercise-card">
+                                    <img src="https://image.tuasaude.com/media/article/cu/uv/agachamento-hack_75592.gif?width=686&height=487"
+                                        alt="Hack" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Hack</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Calcanhares bem apoiados</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>IMPORTANTE:</strong> Mantenha o tronco reto durante todo o movimento
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=96us5Bu1VtE" target="_blank"
+                                            rel="noopener noreferrer" class="youtube-btn">
+                                            <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path
+                                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            </svg>
+                                            Assistir Vídeo
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Exercício 6 -->
+                                <div class="exercise-card">
+                                    <img src="https://image.tuasaude.com/media/article/ov/fb/cadeira-extensora_75064.gif?width=686&height=487"
+                                        alt="Cadeira Extensora" class="exercise-image">
+                                    <div class="exercise-content">
+                                        <h3 class="exercise-title">Cadeira Extensora</h3>
+                                        <div class="exercise-details">
+                                            <div class="detail-row">
+                                                <span class="detail-label">Séries/Volume</span>
+                                                <span class="detail-value">4x10-12</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Técnica</span>
+                                                <span class="detail-value">Foco na contração</span>
+                                            </div>
+                                            <div class="detail-row">
+                                                <span class="detail-label">Intervalo</span>
+                                                <span class="detail-value">60-120s</span>
+                                            </div>
+                                        </div>
+                                        <div class="technique-note">
+                                            <strong>IMPORTANTE:</strong> Mantenha a contração por 1s no topo do
+                                            movimento
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=98D6OPehzLg&list=PLejwjm4sNqsE_lJMad5K3Fw6HCYNNxStd&index=70"
+                                            target="_blank" rel="noopener noreferrer" class="youtube-btn">
                                             <svg class="youtube-icon" viewBox="0 0 24 24" fill="currentColor">
                                                 <path
                                                     d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />

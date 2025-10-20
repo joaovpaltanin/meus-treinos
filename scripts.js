@@ -18,26 +18,7 @@ function updateWorkoutDisplay(workoutValue) {
     }
 }
 
-function openModal() {
-    document.getElementById('orientationsModal').classList.add('show');
-}
 
-function closeModal() {
-    document.getElementById('orientationsModal').classList.remove('show');
-}
-
-function closeModalOutside(event) {
-    if (event.target.id === 'orientationsModal') {
-        closeModal();
-    }
-}
-
-// Fechar modal com tecla ESC
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        closeModal();
-    }
-});
 
 function scrollExercises(direction, workoutId) {
     const grid = document.querySelector(`#${workoutId} .exercises-grid`);
