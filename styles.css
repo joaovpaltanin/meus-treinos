@@ -4,11 +4,50 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg: #1a1a1a;
+    --panel: #2a2a2a;
+    --panel-2: #222;
+    --text: #e0e0e0;
+    --muted: #b0b0b0;
+    --accent: #7bed9f;
+    --accent-2: #5fd07e;
+    --danger: #ff6b6b;
+    --border: #3a3a3a;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #1a1a1a;
-    color: #e0e0e0;
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+}
+
+.skip-link {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    font-weight: 700;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+    z-index: 1000;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: none;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(123, 237, 159, 0.9);
+    outline-offset: 3px;
 }
 
 .container {
@@ -19,36 +58,38 @@ body {
 
 header {
     text-align: center;
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, var(--panel) 0%, var(--bg) 100%);
     color: white;
     margin-bottom: 40px;
     border-radius: 12px;
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--border);
     position: relative;
+    padding: 22px 18px;
 }
 
 h1 {
     font-size: 2.5em;
     font-weight: 700;
-    color: #7bed9f;
+    color: var(--accent);
 }
 
 .subtitle {
     font-size: 1.1em;
     font-weight: 400;
     opacity: 0.8;
-    color: #b0b0b0;
+    color: var(--muted);
+    margin-top: 6px;
 }
 
 
 
 .modal-content strong {
-    color: #7bed9f;
+    color: var(--accent);
     font-weight: 600;
 }
 
 .highlight-red {
-    color: #ff6b6b;
+    color: var(--danger);
     font-weight: 600;
 }
 
@@ -63,9 +104,9 @@ h1 {
     padding: 15px;
     font-size: 1.1em;
     border-radius: 12px;
-    border: 2px solid #3a3a3a;
-    background: #2a2a2a;
-    color: #7bed9f;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    color: var(--accent);
     cursor: pointer;
     font-family: inherit;
     font-weight: 600;
@@ -80,7 +121,7 @@ h1 {
 
 /* Seletor de Treinos */
 .workout-selector {
-    margin-bottom: 40px;
+    margin-bottom: 0;
 }
 
 .workout-selector select {
@@ -88,9 +129,9 @@ h1 {
     padding: 15px;
     font-size: 1.1em;
     border-radius: 12px;
-    border: 2px solid #3a3a3a;
-    background: #2a2a2a;
-    color: #7bed9f;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    color: var(--accent);
     cursor: pointer;
     font-family: inherit;
     font-weight: 600;
@@ -107,14 +148,108 @@ h1 {
 
 .workout-selector select:hover,
 .workout-selector select:focus {
-    border-color: #7bed9f;
+    border-color: var(--accent);
     outline: none;
 }
 
 .workout-selector select option {
-    background: #2a2a2a;
-    color: #7bed9f;
+    background: var(--panel);
+    color: var(--accent);
     padding: 10px;
+}
+
+.exercise-weight {
+    margin-top: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.exercise-weight__row {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 12px;
+    align-items: center;
+}
+
+.exercise-weight__label {
+    font-size: 0.9em;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.exercise-weight__input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.exercise-weight__input:focus,
+.exercise-weight__input:hover {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.controls-bar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: end;
+    margin-bottom: 26px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(26, 26, 26, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 14px;
+    }
+
+    header {
+        margin-bottom: 16px;
+        padding: 16px 14px;
+    }
+
+    .controls-bar {
+        margin-bottom: 14px;
+        padding: 12px;
+        top: 8px;
+    }
+
+    .workout-selector select {
+        font-size: 1.05em;
+        padding: 14px;
+    }
+
+    .exercises-grid {
+        gap: 12px;
+    }
+
+    .exercise-content {
+        padding: 16px;
+    }
+}
+
+.control-label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 0 0 8px 4px;
+    text-align: left;
 }
 
 /* Conteúdo dos Treinos */
@@ -131,138 +266,87 @@ h1 {
 }
 
 .workout-item {
-    background: #1a1a1a;
+    background: var(--bg);
     padding: 25px;
     border-radius: 12px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 2px solid #3a3a3a;
+    border: 2px solid var(--border);
 }
 
 .workout-item:hover {
     transform: translateY(-3px);
-    border-color: #7bed9f;
-    background: #222;
+    border-color: var(--accent);
+    background: var(--panel-2);
 }
 
 .workout-item.active {
-    border-color: #7bed9f;
-    background: #222;
+    border-color: var(--accent);
+    background: var(--panel-2);
 }
 
 .workout-label {
     font-size: 2em;
     font-weight: 700;
-    color: #7bed9f;
+    color: var(--accent);
     margin-bottom: 8px;
 }
 
 .workout-description {
     font-size: 0.95em;
-    color: #b0b0b0;
+    color: var(--muted);
 }
 
 /* Exercícios */
+/* ====== EXERCÍCIOS (GRADE RESPONSIVA) ====== */
 .scroll-button {
-    position: absolute;
-    top: 10%;
-    background: rgb(0 0 0 / 80%);
-    color: #7bed9f;
-    border: none;
-    width: 48px;
-    height: 40px;
-    border-radius: 10%;
-    font-size: 20px;
-    z-index: 2;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.scroll-button:hover {
-    background: rgb(0 0 0 / 80%);
-}
-
-.scroll-button.prev {
-    left: 0;
-}
-
-.scroll-button.next {
-    right: 0;
-}
-
-.exercises-grid {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    display: flex;
-    gap: 20px;
-    flex-wrap: nowrap;
-}
-
-.exercises-grid::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Opera */
 }
 
-.exercise-card {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    margin: 0 auto;
-    background: #2a2a2a;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid #3a3a3a;
-}
-
-@media (min-width: 768px) {
-    .exercise-card {
-        flex: 0 0 450px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .exercises-grid {
-        justify-content: center;
-    }
-}
-
-/* ====== CARROSSEL DE EXERCÍCIOS ====== */
 .carousel-container {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .exercises-carousel {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+    overflow: visible;
 }
 
-.exercises-carousel::-webkit-scrollbar {
-    display: none;
+.exercises-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    align-items: start;
 }
 
-@media (max-width: 768px) {
-    .exercise-card {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+.exercise-card {
+    background: var(--panel);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.exercise-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(123, 237, 159, 0.55);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
 .exercise-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    background: #1a1a1a;
+    background: var(--bg);
+}
+
+@media (min-width: 900px) {
+    .exercise-image {
+        height: 180px;
+    }
 }
 
 .exercise-content {
@@ -272,15 +356,55 @@ h1 {
 .exercise-title {
     font-size: 1.3em;
     margin-bottom: 15px;
-    color: #7bed9f;
+    color: var(--accent);
     font-weight: 600;
 }
 
+.disclosure {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.disclosure__summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 12px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.disclosure__summary::-webkit-details-marker {
+    display: none;
+}
+
+.disclosure__summary::after {
+    content: "▾";
+    color: var(--muted);
+    font-weight: 900;
+    transform: rotate(0deg);
+    transition: transform 0.15s ease;
+}
+
+details.disclosure[open] .disclosure__summary::after {
+    transform: rotate(180deg);
+}
+
+.disclosure__body {
+    padding: 0 12px 12px 12px;
+}
+
 .exercise-details {
-    background: #1a1a1a;
-    padding: 15px;
+    background: var(--bg);
+    padding: 0;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 .detail-row {
@@ -288,26 +412,31 @@ h1 {
     justify-content: space-between;
     padding: 6px 0;
     font-size: 0.9em;
+    gap: 10px;
 }
 
 .detail-label {
     font-weight: 500;
-    color: #b0b0b0;
+    color: var(--muted);
 }
 
 .detail-value {
-    color: #e0e0e0;
+    color: var(--text);
     font-weight: 600;
 }
 
 .technique-note {
-    background: #3a3a3a;
+    background: var(--border);
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 0.88em;
-    border-left: 4px solid #7bed9f;
+    border-left: 4px solid var(--accent);
     color: #d0d0d0;
+}
+
+.notes .technique-note:last-child {
+    margin-bottom: 0;
 }
 
 .youtube-btn {
@@ -317,8 +446,8 @@ h1 {
     gap: 8px;
     width: 100%;
     padding: 12px;
-    background: #7bed9f;
-    color: #1a1a1a;
+    background: var(--accent);
+    color: var(--bg);
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
@@ -327,7 +456,7 @@ h1 {
 }
 
 .youtube-btn:hover {
-    background: #5fd07e;
+    background: var(--accent-2);
     transform: scale(1.02);
 }
 
@@ -338,10 +467,44 @@ h1 {
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 1.8em;
+        font-size: 1.65em;
+    }
+
+    .controls-bar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        top: 8px;
     }
 
     .exercises-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise-image {
+        height: 150px;
+    }
+
+    .exercise-title {
+        font-size: 1.12em;
+        margin-bottom: 10px;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 0;
+    }
+
+    .detail-value {
+        font-weight: 700;
+    }
+
+    .youtube-btn {
+        padding: 12px 14px;
+        font-size: 1em;
+    }
+
+    .exercise-weight__row {
         grid-template-columns: 1fr;
     }
 
