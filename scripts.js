@@ -44,12 +44,6 @@
      */
     let DATASET = null;
 
-    function workoutKeyFromElement(el) {
-        const id = el?.id || '';
-        const match = new RegExp(`^${CONFIG.workoutIdPrefix}(.+)$`).exec(id);
-        return match ? match[1] : '';
-    }
-
     function fadeIn(el) {
         el.style.opacity = '0';
         el.style.transition = `opacity ${CONFIG.fadeInMs}ms ease`;
@@ -90,7 +84,7 @@
 
             const label = document.createElement('label');
             label.className = 'exercise-weight__label';
-            label.textContent = 'Peso atual (kg)';
+            label.textContent = 'Carga (kg)';
 
             const input = document.createElement('input');
             input.className = 'exercise-weight__input';
@@ -98,8 +92,8 @@
             input.inputMode = 'decimal';
             input.step = '0.5';
             input.min = '0';
-            input.placeholder = 'Ex: 20';
-            input.setAttribute('aria-label', `Peso atual em kg para ${titleText}`);
+            input.placeholder = '0';
+            input.setAttribute('aria-label', `Carga em kg para ${titleText}`);
 
             const key = weightStorageKey(workoutValue, titleText);
             const saved = storage.get(key);
@@ -150,6 +144,66 @@
             .replaceAll("'", '&#039;');
     }
 
+    /** Card counter (dots) for horizontal scroll on mobile */
+    function setupCardCounter(container) {
+        const grid = dom.one('.exercises-grid', container);
+        if (!grid) return;
+
+        const cards = dom.all('.exercise-card', grid);
+        if (cards.length <= 1) return;
+
+        // Only show on mobile
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (!isMobile) return;
+
+        const counter = document.createElement('div');
+        counter.className = 'card-counter';
+
+        const label = document.createElement('span');
+        label.className = 'card-counter__label';
+        label.textContent = `1 / ${cards.length}`;
+
+        const dots = document.createElement('div');
+        dots.className = 'card-counter__dots';
+
+        // Show max 10 dots, otherwise just use the label
+        const showDots = cards.length <= 10;
+        if (showDots) {
+            cards.forEach((_, i) => {
+                const dot = document.createElement('span');
+                dot.className = 'card-counter__dot' + (i === 0 ? ' card-counter__dot--active' : '');
+                dots.appendChild(dot);
+            });
+            counter.appendChild(dots);
+        }
+        counter.appendChild(label);
+
+        // Insert counter before the carousel
+        const carousel = dom.one('.carousel-container', container);
+        if (carousel) carousel.parentNode.insertBefore(counter, carousel);
+
+        // Update on scroll
+        let scrollTimer = 0;
+        grid.addEventListener('scroll', () => {
+            window.clearTimeout(scrollTimer);
+            scrollTimer = window.setTimeout(() => {
+                const scrollLeft = grid.scrollLeft;
+                const cardWidth = cards[0].offsetWidth;
+                const gap = 12;
+                const idx = Math.round(scrollLeft / (cardWidth + gap));
+                const clamped = Math.max(0, Math.min(idx, cards.length - 1));
+
+                label.textContent = `${clamped + 1} / ${cards.length}`;
+
+                if (showDots) {
+                    dom.all('.card-counter__dot', dots).forEach((d, i) => {
+                        d.classList.toggle('card-counter__dot--active', i === clamped);
+                    });
+                }
+            }, 50);
+        }, { passive: true });
+    }
+
     function renderWorkoutIntoContainer(workoutValue) {
         const container = dom.byId('workout-container');
         if (!container) return;
@@ -163,7 +217,7 @@
         const cardsHtml = (workout.cards || []).map(card => {
             const title = escapeHtml(card.title);
             const img = card.image?.src
-                ? `<img src="${escapeHtml(card.image.src)}" alt="${escapeHtml(card.image.alt || card.title)}" class="exercise-image">`
+                ? `<img src="${escapeHtml(card.image.src)}" alt="${escapeHtml(card.image.alt || card.title)}" class="exercise-image" loading="lazy">`
                 : '';
 
             const detailsBlock = (card.details || []).length
@@ -234,6 +288,7 @@
         if (container) {
             ensureWeightInputsForRenderedWorkout(workoutValue, container);
             dom.all('details.disclosure[data-default-open="true"]', container).forEach(d => { d.open = true; });
+            setupCardCounter(container);
         }
 
         focusWorkoutContainer();
