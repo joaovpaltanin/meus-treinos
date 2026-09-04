@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1a1a" />
   <title>Meu Treino</title>
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏋️</text></svg>">
@@ -10,36 +11,26 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#workout-container">Pular para os treinos</a>
-  <div class="container">
+  <a class="skip-link" href="#workout-content">Pular para os treinos</a>
+
+  <div class="app">
     <header class="app-header">
-      <div class="app-header__title">
-        <h1>Meu Treino</h1>
-        <p class="subtitle">Selecione um treino</p>
+      <div class="app-header__brand">
+        <span class="app-header__icon" aria-hidden="true">🏋️</span>
+        <div>
+          <h1>Meu Treino</h1>
+          <p class="subtitle">Registre carga e tempo de cada exercício</p>
+        </div>
       </div>
     </header>
 
-    <div class="controls-bar" role="region" aria-label="Controles de treino">
-      <div class="workout-selector">
-        <label class="control-label" for="workout-select">Treino</label>
-        <select id="workout-select" data-role="workout-select">
-                    <option value="T">Técnicas & Orientações</option>
-                    <option value="H">Alongamento Pós Treino</option>
-                    <option value="Z">Abdômen</option>
-                    <option value="Y">Panturrilhas</option>
-                    <option value="A">A - Peito / Ombro / Tríceps</option>
-                    <option value="B">B - Inferiores Completo</option>
-                    <option value="C">C - Dorsais / Bíceps / Deltoide Posterior</option>
-                    <option value="D">D - Peitoral / Deltoide</option>
-                    <option value="E">E - Quadríceps/Glúteo</option>
-                    <option value="F">Pernas de Respeito I</option>
-                    <option value="G">Pernas de Respeito II</option>
-        </select>
-      </div>
-    </div>
+    <nav class="workout-tabs" role="tablist" aria-label="Selecionar treino" id="workout-tabs">
+    </nav>
 
-    <main>
-      <div id="workout-container" tabindex="-1"></div>
+    <main id="workout-content" class="workout-content" tabindex="-1">
+      <div class="empty-state" id="empty-state">
+        <p>Carregando treinos...</p>
+      </div>
     </main>
   </div>
 
