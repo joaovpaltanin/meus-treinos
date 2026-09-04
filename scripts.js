@@ -258,7 +258,10 @@
     `).join('');
 
     const notes = (card.notes || []).length
-      ? `<div class="notes"><p class="notes-title">Orientações</p><ul>${(card.notes || []).map(n => `<li>${escapeHtml(n)}</li>`).join('')}</ul></div>`
+      ? `<details class="notes disclosure" ${card.type === 'info' ? 'open' : ''}>
+           <summary class="disclosure__summary notes-title">Orientações</summary>
+           <ul>${(card.notes || []).map(n => `<li>${escapeHtml(n)}</li>`).join('')}</ul>
+         </details>`
       : '';
 
     const youtube = card.youtubeUrl
