@@ -1307,6 +1307,63 @@
           "youtubeUrl": "https://www.youtube.com/watch?v=1BdeEx18sec"
         }
       ]
+    },
+    {
+      "id": "WOD",
+      "label": "WOD Cindy (CrossFit)",
+      "cards": [
+        {
+          "type": "info",
+          "title": "Formato do WOD Cindy — AMRAP 20 minutos",
+          "image": null,
+          "details": [],
+          "notes": [
+            "AMRAP de 20 minutos: complete o máximo de rodadas possível em 20 min.",
+            "Cada rodada: 5 pull-ups (barra fixa), 10 push-ups (flexões) e 15 air squats (agachamentos livres).",
+            "Anote o número de rodadas (e repetições da rodada incompleta) ao final para acompanhar a evolução."
+          ],
+          "youtubeUrl": "https://www.youtube.com/watch?v=UF8cB8nn9Cs"
+        },
+        {
+          "type": "exercise",
+          "title": "Pull-ups (Barra Fixa)",
+          "image": null,
+          "details": [
+            {
+              "label": "Repetições",
+              "value": "5 por rodada"
+            }
+          ],
+          "notes": [],
+          "youtubeUrl": null
+        },
+        {
+          "type": "exercise",
+          "title": "Push-ups (Flexões)",
+          "image": null,
+          "details": [
+            {
+              "label": "Repetições",
+              "value": "10 por rodada"
+            }
+          ],
+          "notes": [],
+          "youtubeUrl": null
+        },
+        {
+          "type": "exercise",
+          "title": "Air Squats (Agachamento Livre)",
+          "image": null,
+          "details": [
+            {
+              "label": "Repetições",
+              "value": "15 por rodada"
+            }
+          ],
+          "notes": [],
+          "youtubeUrl": null
+        }
+      ]
     }
   ]
 }
