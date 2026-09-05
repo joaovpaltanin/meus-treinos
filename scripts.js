@@ -38,12 +38,12 @@
 
   function loadPersisted() {
     const raw = storage.get(CONFIG.storageKey);
-    if (!raw) return { weights: {}, history: {}, timers: {} };
+    if (!raw) return { weights: {}, history: {}, timers: {}, rounds: {} };
     try {
       const parsed = JSON.parse(raw);
-      return { weights: parsed.weights || {}, history: parsed.history || {}, timers: parsed.timers || {} };
+      return { weights: parsed.weights || {}, history: parsed.history || {}, timers: parsed.timers || {}, rounds: parsed.rounds || {} };
     } catch {
-      return { weights: {}, history: {}, timers: {} };
+      return { weights: {}, history: {}, timers: {}, rounds: {} };
     }
   }
 
@@ -220,6 +220,33 @@
     return seconds > 0 ? { seconds, label: workout.timer.label || 'Tempo' } : null;
   }
 
+  function renderRoundBlock(workoutValue, rounds) {
+    const count = STORAGE.rounds[workoutValue] ?? 0;
+    const label = escapeHtml(rounds.label || 'Rodadas');
+    const unit = escapeHtml(rounds.unit || '');
+    return `
+      <div class="exercise-section round-counter" data-rounds="${escapeHtml(workoutValue)}">
+        <div class="section-title">${label}</div>
+        <div class="round-control">
+          <button type="button" class="step-btn round-step" data-step="-1" aria-label="Diminuir rodadas">−</button>
+          <input
+            type="number"
+            inputmode="numeric"
+            min="0"
+            step="1"
+            class="weight-input round-input"
+            id="rounds-${escapeHtml(workoutValue)}"
+            value="${count}"
+            aria-label="${label}"
+          />
+          <button type="button" class="step-btn round-step" data-step="1" aria-label="Aumentar rodadas">+</button>
+          <button type="button" class="save-weight-btn round-reset" aria-label="Zerar rodadas">Zerar</button>
+        </div>
+        ${unit ? `<div class="round-unit">${unit}</div>` : ''}
+      </div>
+    `;
+  }
+
   function renderTimerBlock(exerciseId, intervalSeconds, options = {}) {
     const saved = STORAGE.timers[exerciseId];
     const mode = saved?.mode || options.defaultMode || 'stopwatch';
@@ -251,7 +278,7 @@
     `;
   }
 
-  function renderCard(card, workoutValue, index, { hideTimers = false } = {}) {
+  function renderCard(card, workoutValue, index, { hideTimers = false, hideWeights = false } = {}) {
     const exerciseId = uniqueExerciseId(workoutValue, card.title);
     const title = escapeHtml(card.title);
     const img = card.image?.src
@@ -293,7 +320,7 @@
             ${youtube}
           </div>
           ${notes}
-          ${card.type === 'exercise' ? renderWeightBlock(exerciseId, card.title, workoutValue) : ''}
+          ${card.type === 'exercise' && !hideWeights ? renderWeightBlock(exerciseId, card.title, workoutValue) : ''}
           ${card.type === 'exercise' && !hideTimers ? renderTimerBlock(exerciseId, intervalSeconds) : ''}
         </div>
       </article>
@@ -316,10 +343,14 @@
           sectionClass: 'workout-timer',
         })
       : '';
-    const cards = (workout.cards || []).map((card, i) => renderCard(card, workoutValue, i, { hideTimers: !!workoutTimer })).join('');
+    const workoutRounds = workout.rounds;
+    const globalRounds = workoutRounds ? renderRoundBlock(workoutValue, workoutRounds) : '';
+    const hasGlobalControls = !!workoutTimer || !!workoutRounds;
+    const cards = (workout.cards || []).map((card, i) => renderCard(card, workoutValue, i, { hideTimers: !!workoutTimer, hideWeights: !!workoutRounds })).join('');
     container.innerHTML = `
       <div class="workout-panel" id="panel-${escapeHtml(workoutValue)}" role="tabpanel" aria-labelledby="tab-${escapeHtml(workoutValue)}">
         <h2 class="workout-title">${escapeHtml(workout.label)}</h2>
+        ${globalRounds}
         ${globalTimer}
         <div class="exercises-list">${cards}</div>
       </div>
@@ -328,7 +359,9 @@
     fadeIn(container);
     bindWeightControls(workoutValue);
     bindTimerControls(workoutValue);
+    bindRoundControls(workoutValue);
     restoreTimerDisplays(workoutValue);
+    restoreRoundDisplay(workoutValue);
   }
 
   function fadeIn(el) {
@@ -399,6 +432,41 @@
 
     const workoutValue = getSelectedWorkout();
     renderWorkout(workoutValue);
+  }
+
+  function bindRoundControls(workoutValue) {
+    const container = dom.byId('workout-content');
+    if (!container) return;
+    const section = container.querySelector('.round-counter');
+    if (!section) return;
+
+    const input = section.querySelector('.round-input');
+    const update = (value) => {
+      const next = Math.max(0, parseInt(value, 10) || 0);
+      STORAGE.rounds[workoutValue] = next;
+      input.value = next;
+      savePersisted();
+    };
+
+    section.querySelectorAll('.round-step').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = parseInt(btn.dataset.step, 10) || 0;
+        update((parseInt(input.value, 10) || 0) + step);
+      });
+    });
+
+    const reset = section.querySelector('.round-reset');
+    if (reset) reset.addEventListener('click', () => update(0));
+
+    input.addEventListener('change', () => update(input.value));
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') update(input.value); });
+  }
+
+  function restoreRoundDisplay(workoutValue) {
+    const section = dom.one('.round-counter', dom.byId('workout-content'));
+    if (!section || section.dataset.rounds !== workoutValue) return;
+    const input = section.querySelector('.round-input');
+    if (input) input.value = STORAGE.rounds[workoutValue] ?? 0;
   }
 
   function deleteHistoryEntry(exerciseId, idx, workoutValue) {

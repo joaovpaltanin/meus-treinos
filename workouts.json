@@ -1367,7 +1367,11 @@
           "notes": [],
           "youtubeUrl": null
         }
-      ]
+      ],
+      "rounds": {
+        "label": "Rodadas",
+        "unit": "rodada(s)"
+      }
     }
   ]
 }
