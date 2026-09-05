@@ -530,7 +530,7 @@
       TIMERS.delete(exerciseId);
       updateTimerButtonStates(timerEl, false);
       savePersisted();
-      if ('vibrate' in navigator) navigator.vibrate([200, 100, 200]);
+      if ('vibrate' in navigator) navigator.vibrate([400, 200, 400, 200, 600]);
     }
   }
 
