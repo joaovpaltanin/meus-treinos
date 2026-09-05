@@ -211,26 +211,34 @@
     `;
   }
 
-  function renderTimerBlock(exerciseId, intervalSeconds) {
+  function workoutTimerId(workoutValue) {
+    return `${workoutValue}::__workout__`;
+  }
+
+  function getWorkoutTimer(workout) {
+    const seconds = Number(workout?.timer?.seconds);
+    return seconds > 0 ? { seconds, label: workout.timer.label || 'Tempo' } : null;
+  }
+
+  function renderTimerBlock(exerciseId, intervalSeconds, options = {}) {
     const saved = STORAGE.timers[exerciseId];
-    const elapsed = saved ? saved.elapsed : 0;
-    const running = saved ? saved.running : false;
-    const mode = saved?.mode || 'stopwatch';
+    const mode = saved?.mode || options.defaultMode || 'stopwatch';
     const target = intervalSeconds > 0 ? intervalSeconds : 60;
+    const elapsed = saved ? saved.elapsed : (mode === 'countdown' ? target : 0);
 
     const countdownOptions = intervalSeconds > 0
       ? [{ label: 'Intervalo', value: intervalSeconds }]
       : [];
 
     return `
-      <div class="exercise-section">
-        <div class="section-title">Tempo</div>
+      <div class="exercise-section ${options.sectionClass || ''}">
+        <div class="section-title">${escapeHtml(options.title || 'Tempo')}</div>
         <div class="timer" data-timer="${escapeHtml(exerciseId)}" data-mode="${mode}">
           <div class="timer-display" aria-live="polite">${formatTime(elapsed)}</div>
           <div class="timer-mode" ${countdownOptions.length ? '' : 'hidden'}>
             <label class="timer-mode__label">
               <input type="checkbox" class="timer-mode__toggle" ${mode === 'countdown' ? 'checked' : ''}>
-              <span>Countdown ${target}s</span>
+              <span>Countdown ${formatTime(target)}</span>
             </label>
           </div>
           <div class="timer-controls">
@@ -243,7 +251,7 @@
     `;
   }
 
-  function renderCard(card, workoutValue, index) {
+  function renderCard(card, workoutValue, index, { hideTimers = false } = {}) {
     const exerciseId = uniqueExerciseId(workoutValue, card.title);
     const title = escapeHtml(card.title);
     const img = card.image?.src
@@ -286,7 +294,7 @@
           </div>
           ${notes}
           ${card.type === 'exercise' ? renderWeightBlock(exerciseId, card.title, workoutValue) : ''}
-          ${card.type === 'exercise' ? renderTimerBlock(exerciseId, intervalSeconds) : ''}
+          ${card.type === 'exercise' && !hideTimers ? renderTimerBlock(exerciseId, intervalSeconds) : ''}
         </div>
       </article>
     `;
@@ -300,10 +308,19 @@
       return;
     }
 
-    const cards = (workout.cards || []).map((card, i) => renderCard(card, workoutValue, i)).join('');
+    const workoutTimer = getWorkoutTimer(workout);
+    const globalTimer = workoutTimer
+      ? renderTimerBlock(workoutTimerId(workoutValue), workoutTimer.seconds, {
+          title: workoutTimer.label,
+          defaultMode: 'countdown',
+          sectionClass: 'workout-timer',
+        })
+      : '';
+    const cards = (workout.cards || []).map((card, i) => renderCard(card, workoutValue, i, { hideTimers: !!workoutTimer })).join('');
     container.innerHTML = `
       <div class="workout-panel" id="panel-${escapeHtml(workoutValue)}" role="tabpanel" aria-labelledby="tab-${escapeHtml(workoutValue)}">
         <h2 class="workout-title">${escapeHtml(workout.label)}</h2>
+        ${globalTimer}
         <div class="exercises-list">${cards}</div>
       </div>
     `;
@@ -394,9 +411,10 @@
   function restoreTimerDisplays(workoutValue) {
     const workout = findWorkout(workoutValue);
     if (!workout) return;
-    (workout.cards || []).forEach(card => {
-      if (card.type !== 'exercise') return;
-      const exerciseId = uniqueExerciseId(workoutValue, card.title);
+    const ids = getWorkoutTimer(workout)
+      ? [workoutTimerId(workoutValue)]
+      : (workout.cards || []).filter(c => c.type === 'exercise').map(c => uniqueExerciseId(workoutValue, c.title));
+    ids.forEach(exerciseId => {
       const saved = STORAGE.timers[exerciseId];
       const timerEl = dom.one(`.timer[data-timer="${CSS.escape(exerciseId)}"]`, dom.byId('workout-content'));
       if (timerEl && saved) {
@@ -438,6 +456,7 @@
     const workoutValue = getSelectedWorkout();
     const workout = findWorkout(workoutValue);
     if (!workout) return 60;
+    if (exerciseId === workoutTimerId(workoutValue)) return getWorkoutTimer(workout)?.seconds || 60;
     const card = (workout.cards || []).find(c => uniqueExerciseId(workoutValue, c.title) === exerciseId);
     const seconds = parseSecondsFromInterval(detailByLabel(card || {}, 'Intervalo'));
     return seconds > 0 ? seconds : 60;
@@ -456,7 +475,8 @@
     }
 
     if (!STORAGE.timers[exerciseId]) {
-      STORAGE.timers[exerciseId] = { elapsed: 0, running: false, mode: timerEl.dataset.mode || 'stopwatch' };
+      const mode = timerEl.dataset.mode || 'stopwatch';
+      STORAGE.timers[exerciseId] = { elapsed: mode === 'countdown' ? getDefaultCountdown(exerciseId) : 0, running: false, mode };
     }
 
     if (action === 'play') {
