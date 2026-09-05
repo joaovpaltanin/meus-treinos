@@ -1311,6 +1311,10 @@
     {
       "id": "WOD",
       "label": "WOD Cindy (CrossFit)",
+      "timer": {
+        "seconds": 1200,
+        "label": "AMRAP 20 minutos"
+      },
       "cards": [
         {
           "type": "info",
